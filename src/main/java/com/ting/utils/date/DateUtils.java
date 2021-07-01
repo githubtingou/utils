@@ -29,6 +29,29 @@ public class DateUtils {
     public static final DateTimeFormatter DATE_FORMATTER_STR = DateTimeFormatter.ofPattern("yyyyMMdd");
     public static final DateTimeFormatter DATE_FORMATTER_MINUTE = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
+
+    /**
+     * localDate转为LocalDateTime
+     *
+     * @param localDate
+     * @return
+     */
+    public static LocalDateTime localDate2LocalDateTime(LocalDate localDate) {
+        return localDate.atStartOfDay(ZoneId.systemDefault()).toLocalDateTime();
+
+    }
+
+    /**
+     * localDate转为LocalDateTime
+     *
+     * @param localDate
+     * @return
+     */
+    public static LocalDate localDateTime2LocalDate(LocalDateTime localDate) {
+        return localDate.toLocalDate();
+
+    }
+
     /**
      * 时间格式转换
      *
@@ -165,6 +188,10 @@ public class DateUtils {
         System.out.println("date2LocalDateTime = " + date2LocalDateTime(new Date()).format(DATE_TIME_FORMATTER));
 
         System.out.println("localDateTime2Date = " + localDateTime2Date(LocalDateTime.now()));
+
+        System.out.println("localDate2LocalDateTime = " + localDate2LocalDateTime(LocalDate.now()));
+
+        System.out.println("localDateTime2LocalDate = " + localDateTime2LocalDate(LocalDateTime.now()));
 
     }
 
