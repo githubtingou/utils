@@ -35,6 +35,7 @@ public class ApplicationContextUtil implements ApplicationContextAware {
      * @param <T>  泛型
      * @return class
      */
+    @SuppressWarnings("all")
     public static <T> T getBean(String name) {
         return (T) getApplicationContext().getBean(name);
     }

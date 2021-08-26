@@ -8,8 +8,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +61,24 @@ public class DateUtils {
     public static String timeFormatter(LocalDateTime localDateTime) {
         Assert.notNull(localDateTime, "参数不能为空");
         return localDateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * 获取俩个时间段的所有时间
+     *
+     * @param start 开始时间
+     * @param end   结束时间
+     * @return List<String>  "yyyy-MM-dd
+     * @throws IllegalArgumentException start.isAfter(end) == true
+     */
+    public static List<String> getDates(LocalDate start, LocalDate end) {
+        Assert.isTrue(start.isBefore(end), "开始时间不能大于结束事件");
+        List<String> list = new ArrayList<>();
+        while (start.isAfter(end)) {
+            list.add(start.plusDays(1L).format(DATE_FORMATTER));
+
+        }
+        return list;
     }
 
     /**
@@ -145,6 +163,7 @@ public class DateUtils {
             list.add(nowPlusTime.format(DATE_TIME_FORMATTER) + "-" + startTime.format(DATE_TIME_FORMATTER));
         }
         return list;
+
     }
 
     /**
@@ -193,6 +212,7 @@ public class DateUtils {
 
         System.out.println("localDateTime2LocalDate = " + localDateTime2LocalDate(LocalDateTime.now()));
 
+        System.out.println("getDates = " + getDates(LocalDate.now().plusDays(-10L), LocalDate.now()));
     }
 
 

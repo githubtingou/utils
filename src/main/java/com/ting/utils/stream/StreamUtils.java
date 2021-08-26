@@ -35,7 +35,10 @@ public class StreamUtils {
      * @param <T>             泛型
      * @return {@link BigDecimal} 计算后的数据
      */
-    public static <T> BigDecimal calculationCollection(Collection<T> collection, Function<T, BigDecimal> function, BigDecimal decimal, BinaryOperator<BigDecimal> decimalFunction) {
+    public static <T> BigDecimal calculationCollection(Collection<T> collection,
+                                                       Function<T, BigDecimal> function,
+                                                       BigDecimal decimal,
+                                                       BinaryOperator<BigDecimal> decimalFunction) {
         Assert.notEmpty(collection, "数据不能为空");
         return collection.stream()
                 .map(function)
@@ -49,8 +52,8 @@ public class StreamUtils {
      * <p>
      * 这个只是一个简单的事例
      *
-     * @param list
-     * @return
+     * @param list 嵌套list
+     * @return 分支后的嵌套list
      */
     public static Map<String, List<ParamDto<String, List<ParamDto<String, String>>>>> listToMapByListParam(List<ParamDto<String, List<ParamDto<String, String>>>> list) {
         return list.stream()
@@ -59,7 +62,7 @@ public class StreamUtils {
                         .map(data -> new AbstractMap.SimpleEntry<>(data.getGroupKey(), item))
                 )
                 .collect(Collectors.groupingBy(AbstractMap.SimpleEntry::getKey,
-                        Collectors.mapping(AbstractMap.SimpleEntry::getValue, Collectors.toList())
+                                Collectors.mapping(AbstractMap.SimpleEntry::getValue, Collectors.toList())
                         )
                 );
     }
